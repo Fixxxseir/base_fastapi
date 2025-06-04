@@ -6,6 +6,7 @@ from fastapi_users.db import (
 )
 
 
+from core.types.user_id import UserIDType
 from .base import Base
 from .mixins.id_int_pk import IdIntPkMixin
 
@@ -13,7 +14,7 @@ if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
 
 
-class User(Base, IdIntPkMixin, SQLAlchemyBaseUserTable[int]):
+class User(Base, IdIntPkMixin, SQLAlchemyBaseUserTable[UserIDType]):
     pass
 
     @classmethod
