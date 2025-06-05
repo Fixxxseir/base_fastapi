@@ -1,7 +1,9 @@
-from typing import TYPE_CHECKING
+from typing import (
+    TYPE_CHECKING,
+    Annotated,
+)
 
 from fastapi import Depends
-from sqlalchemy.sql.annotation import Annotated
 
 from core.models import db_helper, AccessToken
 
