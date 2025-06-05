@@ -50,7 +50,7 @@ class Settings(BaseSettings):
     run: RunConfig = RunConfig()
     api: ApiPrefix = ApiPrefix()
     db: DatabaseConfig
-    accessToken: AccessToken
+    access_token: AccessToken
 
 
 settings = Settings()
