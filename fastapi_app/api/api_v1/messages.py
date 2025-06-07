@@ -3,8 +3,8 @@ from typing import Annotated
 from fastapi import APIRouter, Depends
 
 from api.api_v1.fastapi_users_router import (
-    current_user,
-    current_superuser,
+    current_active_user,
+    current_active_superuser,
 )
 from core.config import settings
 from core.models import User
@@ -20,7 +20,7 @@ router = APIRouter(
 def get_user_messages(
     user: Annotated[
         User,
-        Depends(current_user),
+        Depends(current_active_user),
     ],
 ):
     return {
@@ -33,7 +33,7 @@ def get_user_messages(
 def get_superuser_messages(
     user: Annotated[
         User,
-        Depends(current_superuser),
+        Depends(current_active_superuser),
     ],
 ):
     return {
