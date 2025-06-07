@@ -14,10 +14,8 @@ log = logging.getLogger(__name__)
 
 
 class UserManager(IntegerIDMixin, BaseUserManager[User, UserIDType]):
-    reset_password_token_secret = (
-        settings.access_token_secret.reset_password_token_secret
-    )
-    verification_token_secret = settings.access_token_secret.verification_token_secret
+    reset_password_token_secret = settings.access_token.reset_password_token_secret
+    verification_token_secret = settings.access_token.verification_token_secret
 
     async def on_after_register(
         self,
@@ -25,3 +23,15 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, UserIDType]):
         request: Optional["Request"] = None,
     ):
         log.warning("User %r has registered.", user.id)
+
+    async def on_after_request_verify(
+        self,
+        user: User,
+        token: str,
+        request: Optional["Request"] = None,
+    ):
+        log.warning(
+            "Verification requested for user %r. Verification token: %r",
+            user.id,
+            token,
+        )
